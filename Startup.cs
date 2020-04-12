@@ -1,3 +1,4 @@
+using DI.LifeTimes.WebApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +20,12 @@ namespace DI.LifeTimes.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSingleton<ISingletonOperation, SingletonOperation>();
+            services.AddTransient<ITransientOperation, TransientOperation>();
+            services.AddScoped<IScopedOperation, ScopedOperation>();
+
+            services.AddTransient<IMyService, MyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
